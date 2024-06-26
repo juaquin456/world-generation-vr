@@ -19,7 +19,7 @@ public class Slice : MonoBehaviour
         
     }
 
-    public void Slice(GameObject target) {
+    public void SliceObject(GameObject target) {
          
     }
 }
