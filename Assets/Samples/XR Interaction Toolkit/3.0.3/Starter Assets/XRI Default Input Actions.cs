@@ -842,6 +842,15 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Push Press"",
+                    ""type"": ""Button"",
+                    ""id"": ""2759b0f7-b1df-4050-999d-650fd84db621"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1029,6 +1038,17 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fbb5edf-c047-49be-afb6-6d3f8ae4d3dc"",
+                    ""path"": ""<XRController>{LeftHand}/gripButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Push Press"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2851,6 +2871,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         m_XRILeftInteraction_ScaleToggle = m_XRILeftInteraction.FindAction("Scale Toggle", throwIfNotFound: true);
         m_XRILeftInteraction_ScaleOverTime = m_XRILeftInteraction.FindAction("Scale Over Time", throwIfNotFound: true);
         m_XRILeftInteraction_ShootPress = m_XRILeftInteraction.FindAction("Shoot Press", throwIfNotFound: true);
+        m_XRILeftInteraction_PushPress = m_XRILeftInteraction.FindAction("Push Press", throwIfNotFound: true);
         // XRI Left Locomotion
         m_XRILeftLocomotion = asset.FindActionMap("XRI Left Locomotion", throwIfNotFound: true);
         m_XRILeftLocomotion_TeleportMode = m_XRILeftLocomotion.FindAction("Teleport Mode", throwIfNotFound: true);
@@ -3258,6 +3279,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     private readonly InputAction m_XRILeftInteraction_ScaleToggle;
     private readonly InputAction m_XRILeftInteraction_ScaleOverTime;
     private readonly InputAction m_XRILeftInteraction_ShootPress;
+    private readonly InputAction m_XRILeftInteraction_PushPress;
     public struct XRILeftInteractionActions
     {
         private @XRIDefaultInputActions m_Wrapper;
@@ -3275,6 +3297,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         public InputAction @ScaleToggle => m_Wrapper.m_XRILeftInteraction_ScaleToggle;
         public InputAction @ScaleOverTime => m_Wrapper.m_XRILeftInteraction_ScaleOverTime;
         public InputAction @ShootPress => m_Wrapper.m_XRILeftInteraction_ShootPress;
+        public InputAction @PushPress => m_Wrapper.m_XRILeftInteraction_PushPress;
         public InputActionMap Get() { return m_Wrapper.m_XRILeftInteraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3323,6 +3346,9 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @ShootPress.started += instance.OnShootPress;
             @ShootPress.performed += instance.OnShootPress;
             @ShootPress.canceled += instance.OnShootPress;
+            @PushPress.started += instance.OnPushPress;
+            @PushPress.performed += instance.OnPushPress;
+            @PushPress.canceled += instance.OnPushPress;
         }
 
         private void UnregisterCallbacks(IXRILeftInteractionActions instance)
@@ -3366,6 +3392,9 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @ShootPress.started -= instance.OnShootPress;
             @ShootPress.performed -= instance.OnShootPress;
             @ShootPress.canceled -= instance.OnShootPress;
+            @PushPress.started -= instance.OnPushPress;
+            @PushPress.performed -= instance.OnPushPress;
+            @PushPress.canceled -= instance.OnPushPress;
         }
 
         public void RemoveCallbacks(IXRILeftInteractionActions instance)
@@ -4102,6 +4131,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         void OnScaleToggle(InputAction.CallbackContext context);
         void OnScaleOverTime(InputAction.CallbackContext context);
         void OnShootPress(InputAction.CallbackContext context);
+        void OnPushPress(InputAction.CallbackContext context);
     }
     public interface IXRILeftLocomotionActions
     {

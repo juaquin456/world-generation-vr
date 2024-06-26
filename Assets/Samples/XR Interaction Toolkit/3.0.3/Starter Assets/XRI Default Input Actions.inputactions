@@ -819,6 +819,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Push Press",
+                    "type": "Button",
+                    "id": "2759b0f7-b1df-4050-999d-650fd84db621",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1006,6 +1015,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fbb5edf-c047-49be-afb6-6d3f8ae4d3dc",
+                    "path": "<XRController>{LeftHand}/gripButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Push Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
