@@ -1672,7 +1672,7 @@ Shader "SineVFX/TranslucentCrystals/Crystal"
 		
 	}
 	/*ase_lod*/
-	CustomEditor "UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI"
+	CustomEditor "UnityEditor.ShaderGraph.PBRMasterGUI"
 	Fallback "Hidden/InternalErrorShader"
 	
 }
