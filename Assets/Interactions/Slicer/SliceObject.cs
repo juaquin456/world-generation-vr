@@ -30,6 +30,7 @@ public class sliceObject : MonoBehaviour
             bool hasHit = Physics.Linecast(sliceSource.position, sliceEnd.position, out RaycastHit hit, sliceableLayer);
             if (hasHit)
             {
+                Debug.Log("It hits");
                 GameObject target = hit.transform.gameObject;
                 Slice(target);
             }
