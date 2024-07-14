@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.XR.Interaction.Toolkit;   
+using UnityEngine.XR.Interaction.Toolkit;
+using Unity.XR.CoreUtils;
+using Unity.VisualScripting;
 
 public class EndlessTerrain : MonoBehaviour {
 
@@ -22,7 +24,9 @@ public class EndlessTerrain : MonoBehaviour {
 	int chunkSize;
 	int chunksVisibleInViewDst;
 
-	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
+	public List<GameObject> gameObjects = new List<GameObject>();
+
+    Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
 	void Start() {
@@ -61,7 +65,7 @@ public class EndlessTerrain : MonoBehaviour {
 				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
-					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
+					terrainChunkDictionary.Add (viewedChunkCoord, new TerrainChunk (viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial, gameObjects));			
 				}
 
 			}
@@ -81,14 +85,14 @@ public class EndlessTerrain : MonoBehaviour {
 		LODInfo[] detailLevels;
 		LODMesh[] lodMeshes;
 		LODMesh collisionLODMesh;
-
+		List<GameObject> ga;
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
 
-		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material) {
+		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, List<GameObject> gameObjects) {
 			this.detailLevels = detailLevels;
-
+			this.ga = gameObjects;
 			position = coord * size;
 			bounds = new Bounds(position,Vector2.one * size);
 			Vector3 positionV3 = new Vector3(position.x,0,position.y);
@@ -120,7 +124,7 @@ public class EndlessTerrain : MonoBehaviour {
 
 		void OnMapDataReceived(MapData mapData) {
 			this.mapData = mapData;
-			mapDataReceived = true;
+            mapDataReceived = true;
 
 			Texture2D texture = TextureGenerator.TextureFromColourMap (mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize);
 			meshRenderer.material.mainTexture = texture;
@@ -160,14 +164,19 @@ public class EndlessTerrain : MonoBehaviour {
 					if (lodIndex == 0) {
 						if (collisionLODMesh.hasMesh) {
 							meshCollider.sharedMesh = collisionLODMesh.mesh;
-						} else if (!collisionLODMesh.hasRequestedMesh) {
+							int randpos = collisionLODMesh.mesh.vertices.Length;
+							var t = collisionLODMesh.mesh.vertices[Random.Range(0, randpos)];
+							t = meshObject.transform.TransformPoint(t);
+                            GameObject clone = Instantiate(ga[0], t + new Vector3(0, 1, 0), Quaternion.identity);
+							clone.transform.parent = meshObject.transform;
+                        } else if (!collisionLODMesh.hasRequestedMesh) {
 							collisionLODMesh.RequestMesh (mapData);
 						}
 					}
 
 					terrainChunksVisibleLastUpdate.Add (this);
 				}
-
+				
 				SetVisible (visible);
 			}
 		}

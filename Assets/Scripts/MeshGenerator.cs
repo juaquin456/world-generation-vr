@@ -45,7 +45,7 @@ public static class MeshGenerator {
 				float height = heightCurve.Evaluate (heightMap [x, y]) * heightMultiplier;
 				Vector3 vertexPosition = new Vector3 (topLeftX + percent.x * meshSizeUnsimplified, height, topLeftZ - percent.y * meshSizeUnsimplified);
 
-				meshData.AddVertex (vertexPosition, percent, vertexIndex);
+                meshData.AddVertex (vertexPosition, percent, vertexIndex);
 
 				if (x < borderedSize - 1 && y < borderedSize - 1) {
 					int a = vertexIndicesMap [x, y];
