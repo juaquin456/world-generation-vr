@@ -164,12 +164,17 @@ public class EndlessTerrain : MonoBehaviour {
 					if (lodIndex == 0) {
 						if (collisionLODMesh.hasMesh) {
 							meshCollider.sharedMesh = collisionLODMesh.mesh;
-							int randpos = collisionLODMesh.mesh.vertices.Length;
-							var t = collisionLODMesh.mesh.vertices[Random.Range(0, randpos)];
-							t = meshObject.transform.TransformPoint(t);
-                            GameObject clone = Instantiate(ga[0], t + new Vector3(0, 1, 0), Quaternion.identity);
-							clone.transform.parent = meshObject.transform;
-                        } else if (!collisionLODMesh.hasRequestedMesh) {
+							for (int i = 0; i < 7; i++)
+							{
+								int vertexLenght = collisionLODMesh.mesh.vertices.Length;
+								int objsLenght = ga.Count;
+								var t = collisionLODMesh.mesh.vertices[Random.Range(0, vertexLenght)];
+								t = meshObject.transform.TransformPoint(t);
+								GameObject clone = Instantiate(ga[Random.Range(0, objsLenght)], t + new Vector3(0, 1, 0), Quaternion.identity);
+								clone.transform.parent = meshObject.transform;
+							}
+							
+						} else if (!collisionLODMesh.hasRequestedMesh) {
 							collisionLODMesh.RequestMesh (mapData);
 						}
 					}
