@@ -170,7 +170,7 @@ public class EndlessTerrain : MonoBehaviour {
 								int objsLenght = ga.Count;
 								var t = collisionLODMesh.mesh.vertices[Random.Range(0, vertexLenght)];
 								t = meshObject.transform.TransformPoint(t);
-								GameObject clone = Instantiate(ga[Random.Range(0, objsLenght)], t + new Vector3(0, 1, 0), Quaternion.identity);
+								GameObject clone = Instantiate(ga[Random.Range(0, objsLenght)], t + new Vector3(0, 0.5f - 0.07f, 0), Quaternion.identity);
 								clone.transform.parent = meshObject.transform;
 							}
 							
