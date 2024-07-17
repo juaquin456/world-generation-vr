@@ -7,8 +7,8 @@ public class FollowIA : MonoBehaviour
     public Transform target;
     public float minDistance = 5.0f;
     public Animator animator;
-
-    bool isFollowing = false;
+    public GameObject bulletPrefab;
+    public float timeBetweenShots = 1f;
     bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
@@ -49,7 +49,15 @@ public class FollowIA : MonoBehaviour
 
     private void startAttack() {
         isAttacking = true;
+        StartCoroutine(Shoot());
         animator.Play("shot");
         Debug.Log("Start Attack");
+    }
+
+    IEnumerator Shoot() {
+        while (isAttacking) {
+            yield return new WaitForSeconds(timeBetweenShots);
+            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        }
     }
 }
