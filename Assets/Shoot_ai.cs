@@ -17,7 +17,6 @@ public class Shoot_ai : MonoBehaviour
     }
 
     private void Launch() {
-        Debug.Log(player.position + " " + transform.position);
         Vector3 dir = (player.position - transform.position).normalized;
         rb.velocity = dir * speed;
         StartCoroutine(DestroyBullet());
