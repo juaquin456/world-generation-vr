@@ -5,18 +5,21 @@ using UnityEngine;
 public class Shoot_ai : MonoBehaviour
 {
     public float speed;
-    public Transform player;
+    private Transform player;
     private Rigidbody rb;
 
     void Start()
     {
+        // tag MainCamera
+        player = GameObject.FindGameObjectWithTag("MainCamera").transform;
         rb = GetComponent<Rigidbody>();    
         Launch();
     }
 
     private void Launch() {
-        Vector3 dir = player.position - transform.position;
-        rb.velocity = dir.normalized * speed;
+        Debug.Log(player.position + " " + transform.position);
+        Vector3 dir = (player.position - transform.position).normalized;
+        rb.velocity = dir * speed;
         StartCoroutine(DestroyBullet());
     }
 

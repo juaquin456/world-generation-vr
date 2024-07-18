@@ -56,8 +56,8 @@ public class FollowIA : MonoBehaviour
 
     IEnumerator Shoot() {
         while (isAttacking) {
+            Instantiate(bulletPrefab, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
             yield return new WaitForSeconds(timeBetweenShots);
-            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         }
     }
 }
