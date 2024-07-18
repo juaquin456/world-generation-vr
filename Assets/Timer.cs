@@ -38,7 +38,8 @@ public class Timer : MonoBehaviour
 
     public void DecreaseTime(float amount)
     {
-        remainingTime -= amount;
+        if (remainingTime - amount > 0) { remainingTime -= amount; }
+        else { remainingTime = 0; }
     }
 
     public void IncreaseCountdownSpeed()

@@ -32,7 +32,6 @@ public class sliceObject : MonoBehaviour
             {
                 Debug.Log("It hits");
                 GameObject target = hit.transform.gameObject;
-                Slice(target);
             }
         }
     }

@@ -89,6 +89,7 @@ public class EndlessTerrain : MonoBehaviour {
 		MapData mapData;
 		bool mapDataReceived;
 		int previousLODIndex = -1;
+		int number_objects_generate = 30;
 
 		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material, List<GameObject> gameObjects) {
 			this.detailLevels = detailLevels;
@@ -164,13 +165,13 @@ public class EndlessTerrain : MonoBehaviour {
 					if (lodIndex == 0) {
 						if (collisionLODMesh.hasMesh) {
 							meshCollider.sharedMesh = collisionLODMesh.mesh;
-							for (int i = 0; i < 7; i++)
+							for (int i = 0; i < number_objects_generate; i++)
 							{
 								int vertexLenght = collisionLODMesh.mesh.vertices.Length;
 								int objsLenght = ga.Count;
 								var t = collisionLODMesh.mesh.vertices[Random.Range(0, vertexLenght)];
 								t = meshObject.transform.TransformPoint(t);
-								GameObject clone = Instantiate(ga[Random.Range(0, objsLenght)], t + new Vector3(0, 0.5f - 0.07f, 0), Quaternion.identity);
+								GameObject clone = Instantiate(ga[Random.Range(0, objsLenght)], t + new Vector3(0, 2.0f, 0), Quaternion.identity);
 								clone.transform.parent = meshObject.transform;
 							}
 							
