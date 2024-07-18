@@ -13,7 +13,7 @@ public class inventory_box : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Verificar el tipo de objeto que est· colisionando
+        // Verificar el tipo de objeto que estÅEcolisionando
         if (other.GetComponent<crystal_object>())
         {
             crystal_inventory_item.add();

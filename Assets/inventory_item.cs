@@ -10,9 +10,9 @@ public class inventory_item : MonoBehaviour
 {
     private int counter = 0;
     private int goal = 10;
-    public TextMeshPro textObject;
-
-    // Start is called before the first frame update
+    public float timeIncrement = 5f;
+    public TMP_Text text;
+    public Timer timer;
 
     private void generate_new_goal()
     {
@@ -21,22 +21,23 @@ public class inventory_item : MonoBehaviour
 
     void Start()
     {
-        update_text(); // Obtener el componente TextMeshProUGUI
+        update_text(); 
     }
 
     private void update_text()
     {
-        textObject.text = counter.ToString() + "/" + goal.ToString();
-        // textObject.GetComponent<inventory_item>().text = counter.ToString() + "/" + goal.ToString();
+        text.text = counter.ToString() + "/" + goal.ToString();
     }
 
     public void add()
     {
         counter++;
+        timer.IncreaseTime(timeIncrement);
         if (counter == goal)
         {
             counter = 0;
             generate_new_goal();
+            timer.IncreaseCountdownSpeed();
         }
         update_text();
     }
