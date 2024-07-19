@@ -60,7 +60,7 @@ public class Attractor : MonoBehaviour
             {
                 if (Vector3.Distance(hit.collider.gameObject.transform.position, shootSource.position) > 0.5)
                 {
-                    hit.collider.gameObject.GetComponent<Rigidbody>().AddForce((shootSource.position - hit.collider.gameObject.transform.position) * 5);
+                    hit.collider.gameObject.GetComponent<Rigidbody>().AddForce((shootSource.position - hit.collider.gameObject.transform.position) * 10);
                 }
                 else
                 {

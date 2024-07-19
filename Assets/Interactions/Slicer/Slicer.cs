@@ -7,13 +7,17 @@ public class Slicer : MonoBehaviour
 {
     public InputActionReference trigger;
     private bool isTriggered = false;
+
+    public InputActionReference grip;
+    private bool isGripped = false;
+
     public sliceObject slicerObject;
 
     private bool slicerObjectActive = false;
 
     private void StartSlicer()
     {
-        if (isTriggered)
+        if (isTriggered && !isGripped)
         {
             slicerObjectActive = true;
         }
@@ -28,7 +32,8 @@ public class Slicer : MonoBehaviour
     {
         trigger.action.performed += ctx => { isTriggered = true; StartSlicer(); };
         trigger.action.canceled += ctx => { isTriggered = false; StopSlicer(); };
-
+        grip.action.performed += ctx => { isGripped = true; StopSlicer(); };
+        grip.action.canceled += ctx => { isGripped = false; StartSlicer(); };
     }
 
     // Update is called once per frame
