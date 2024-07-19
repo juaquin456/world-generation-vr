@@ -9,6 +9,8 @@ public class Timer : MonoBehaviour
     [SerializeField] float remainingTime;
     private float countdownSpeed = 1f;
 
+    [SerializeField] float timeSurvived;
+    [SerializeField] string timeString;
     void Start()
     {
         
@@ -20,10 +22,13 @@ public class Timer : MonoBehaviour
         if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime * countdownSpeed;
+            timeSurvived += Time.deltaTime;
         } else if (remainingTime < 0)
         {
             remainingTime = 0;
             timerText.color = Color.red;
+            
+            timeString = string.Format("{0:00}:{1:00}", Mathf.FloorToInt(timeSurvived / 60), Mathf.FloorToInt(timeSurvived % 60));
         }
         
         int minutes = Mathf.FloorToInt(remainingTime / 60);

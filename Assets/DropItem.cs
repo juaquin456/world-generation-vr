@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
+    public GameObject gameObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class DropItem : MonoBehaviour
         
     }
 
-    void dropItem() {
+    public void dropItem() {
         Debug.Log("Drop Item");
         Instantiate(gameObject, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
     }
