@@ -31,6 +31,8 @@ public class inventory_item : MonoBehaviour
 
     public void add()
     {
+        AudioManager.instance.Play("add_time");
+
         counter++;
         timer.IncreaseTime(timeIncrement);
         if (counter == goal)

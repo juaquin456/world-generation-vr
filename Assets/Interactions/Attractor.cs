@@ -17,16 +17,22 @@ public class Attractor : MonoBehaviour
     private bool rayActive = false;
 
     public ParticleSystem attractorParticles;
+
+    public Timer timer;
+    public float cost = 1.0f;
     private void StartShoot()
     {
         if (isTriggered && isGripped)
         {
+            AudioManager.instance.Play("attractor");
             attractorParticles.Play();
             rayActive = true;
+
         }
     }
     private void StopShoot()
     {
+        AudioManager.instance.Stop("attractor");
         attractorParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         rayActive = false;
     }
@@ -46,6 +52,7 @@ public class Attractor : MonoBehaviour
     {
         if (rayActive)
         {
+            timer.DecreaseTime(cost);
             RayCastCheck();
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Slicer : MonoBehaviour
 {
     public AudioSource audioSource;
-
+    
     public InputActionReference trigger;
     private bool isTriggered = false;
 
@@ -16,6 +16,9 @@ public class Slicer : MonoBehaviour
     public sliceObject slicerObject;
 
     private bool slicerObjectActive = false;
+
+    public Timer timer;
+    public float cost = 1.0f;
 
     private void StartSlicer()
     {
@@ -46,6 +49,7 @@ public class Slicer : MonoBehaviour
         
         if (slicerObjectActive){
             slicerObject.canSlice = true;
+            timer.DecreaseTime(cost);
             // Hide the renderer of the slicer object
             slicerObject.slicer.GetComponent<Renderer>().enabled = true;
             

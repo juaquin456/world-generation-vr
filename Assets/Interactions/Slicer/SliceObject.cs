@@ -30,6 +30,7 @@ public class sliceObject : MonoBehaviour
             bool hasHit = Physics.Linecast(sliceSource.position, sliceEnd.position, out RaycastHit hit, sliceableLayer);
             if (hasHit)
             {
+                AudioManager.instance.Play("explosion");
                 hit.transform.gameObject.GetComponent<DropItem>().dropItem();
                 Destroy(hit.transform.gameObject);
             }

@@ -17,16 +17,21 @@ public class Repulsor : MonoBehaviour
     private bool rayActive = false;
 
     public ParticleSystem attractorParticles;
+
+    public Timer timer;
+    public float cost = 1.0f;
     private void StartShoot()
     {
         if (isTriggered && isGripped)
         {
+            AudioManager.instance.Play("repulsor");
             attractorParticles.Play();
             rayActive = true;
         }
     }
     private void StopShoot()
     {
+        AudioManager.instance.Stop("repulsor");
         attractorParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         rayActive = false;
     }
@@ -46,6 +51,7 @@ public class Repulsor : MonoBehaviour
     {
         if (rayActive)
         {
+            timer.DecreaseTime(cost);
             RayCastCheck();
         }
     }
