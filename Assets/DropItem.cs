@@ -18,7 +18,8 @@ public class DropItem : MonoBehaviour
     }
 
     public void dropItem() {
-        Debug.Log("Drop Item");
-        Instantiate(gameObject, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+        if (Random.Range(1, 3) == 1) { 
+            Instantiate(gameObject, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+        }
     }
 }

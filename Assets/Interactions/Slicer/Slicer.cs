@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Slicer : MonoBehaviour
 {
+    public AudioSource audioSource;
+
     public InputActionReference trigger;
     private bool isTriggered = false;
 
@@ -19,12 +21,14 @@ public class Slicer : MonoBehaviour
     {
         if (isTriggered && !isGripped)
         {
+            audioSource.Play();
             slicerObjectActive = true;
         }
     }
 
     private void StopSlicer()
     {
+        audioSource.Stop();
         slicerObjectActive = false;
     }
 
